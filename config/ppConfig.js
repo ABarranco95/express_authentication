@@ -1,0 +1,43 @@
+const passport = require('passport');
+
+const LocalStrategy = require('passport-local').Strategy;
+const db = require('../models');
+
+
+// passport "serialize" your info and make it easier to log in
+passport.serializeUser((user, cb) => {
+    cb(null, user.id)
+})
+
+// Passport "deserialize" is to take the id and look it up in DB
+passport.deserializeUser((id, cb) => {
+    db.user.findByPK(id)
+    .then(user => {
+        if (user) {
+            cb(null, user);
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    })
+});
+
+
+passport.user(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+}, (email, password, cb) => {
+    db.user.findOne({
+        where: { email }
+    })
+    .then(user => {
+        if (!user || !user.validPassword(password)) {
+            cb(null, false);
+        } else {
+            cb(null, user);
+        }
+    })
+    .catch(cb);
+}));
+
+module.exports = passport;

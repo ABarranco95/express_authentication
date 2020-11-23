@@ -15,6 +15,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
 
+
+// secret: What we actualy will be giving the user on our site as a session cookie
+// resave: Save the session even if its been modified, make this false
+// saveUninitialized: if we have a new session, we save it, therefore making that true
+
+const sessionObject = {
+  secret: SECRET_SESSION,
+  resave: false,
+  saveUninitialized: true
+}
+
+app.use(session(sessionObject));
+
 app.get('/', (req, res) => {
   res.render('index');
 });
