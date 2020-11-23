@@ -1,15 +1,21 @@
 {
   "development": {
+    "username": "postgres",
+    "password": "Litotwin#1",
     "database": "express_auth_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "database": "express_auth_test",
+    "username": "postgres",
+    "password": "Litotwin#1",
+    "database": "express_authe_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
+    "username": "postgres",
+    "password": "Litotwin#1",
     "database": "express_auth_production",
     "host": "127.0.0.1",
     "dialect": "postgres"
