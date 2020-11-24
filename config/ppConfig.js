@@ -11,7 +11,7 @@ passport.serializeUser((user, cb) => {
 
 // Passport "deserialize" is to take the id and look it up in DB
 passport.deserializeUser((id, cb) => {
-    db.user.findByPK(id)
+    db.user.findByPk(id)
     .then(user => {
         if (user) {
             cb(null, user);
